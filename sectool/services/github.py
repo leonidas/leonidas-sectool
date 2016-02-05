@@ -5,7 +5,7 @@ from itertools import chain
 from .env import env
 
 
-class GithubAuth(requests.auth.AuthBase):
+class GitHubAuth(requests.auth.AuthBase):
     def __init__(self):
         self.auth_header = "token {token}".format(token=env('GITHUB_TOKEN'))
 
@@ -15,10 +15,10 @@ class GithubAuth(requests.auth.AuthBase):
         return request
 
 
-GITHUB_AUTH = GithubAuth()
+GITHUB_AUTH = GitHubAuth()
 
 
-class Github(object):
+class GitHub(object):
     def __init__(self, user=None, org=None):
         if (user is None and org is None) or (user is not None and org is not None):
             raise AttributeError("exactly one of user and org must be specified")
@@ -57,8 +57,11 @@ class Github(object):
             if any(entry['name'] == filename for entry in contents):
                 yield repo['name']
 
+    def get_checkout_url(self, repo_name):
+        return 'git@github.com:{owner}/{repo_name}'.format(owner=self.owner, repo_name=repo_name)
+
 
 if __name__ == "__main__":
     from pprint import pprint
-    for repo_name in Github(user='japsu').get_repos_containing_file():
+    for repo_name in GitHub(user='japsu').get_repos_containing_file():
         print(repo_name)

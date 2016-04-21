@@ -2,7 +2,7 @@
 
 ## What it does
 
-* `sectool.npm_check_all` – runs `nsp check` on all `package.json` projects
+* `sectool.nsp_check_all` – runs `nsp check` on all `package.json` projects
 
 ## Getting started
 
@@ -27,9 +27,9 @@ Create a file called `.env` with the following parameters (also environment vars
     GITHUB_USERS=japsu
     GITHUB_ORGS=leonidas
 
-### Running `npm_check_all`
+### Running `nsp_check_all`
 
-    python -m sectool.npm_check_all
+    python -m sectool.nsp_check_all
 
 ## Development
 
